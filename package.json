@@ -2,16 +2,23 @@
   "name": "stocker",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
+  "main": "src/electron-starter.js",
   "dependencies": {
+    "electron-settings": "^3.2.0",
+    "js-search": "^1.4.2",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
     "react-scripts": "2.1.1"
   },
   "scripts": {
+    "dev": "nf start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electron": "electron .",
+    "electron-dev": "ELECTRON_START_URL=http://localhost:3000 electron ."
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -21,5 +28,11 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "electron": "^3.0.8",
+    "electron-fetch": "^1.2.1",
+    "foreman": "^3.0.1",
+    "node-sass": "^4.10.0"
+  }
 }

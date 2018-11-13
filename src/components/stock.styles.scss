@@ -1,0 +1,25 @@
+.stock {
+  display: flex;
+
+  .left {
+    display: flex;
+    width: 18px;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .middle {
+    display: flex;
+    flex: 5;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .right {
+    display: flex;
+    flex: 3;
+    justify-content: flex-end;
+    align-items: center;
+  }
+}
+
