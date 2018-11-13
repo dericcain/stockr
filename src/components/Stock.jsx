@@ -2,13 +2,11 @@ import React from 'react';
 
 import './stock.styles.scss';
 
-// const icon = isFavorite
-
-const Stock = ({ symbol, price, change, chooseAsFavorite }) => (
+const Stock = ({ symbol, price, change, chooseAsFavorite, isFavorite }) => (
   <li className="list-group-item">
     <div className="stock">
       <div className="left">
-        <i className="icon icon-star-empty" onClick={() => chooseAsFavorite(symbol)} />
+        <i className={`icon ${isFavorite ? 'icon-star' : 'icon-star-empty'}`} onClick={() => chooseAsFavorite(symbol)} />
       </div>
       <div className="middle">
         {symbol}

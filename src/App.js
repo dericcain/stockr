@@ -31,6 +31,10 @@ class App extends Component {
     this.search = new Search();
   }
 
+  get favoriteStock() {
+    const favorite = settings.get('stocks.favorite');
+    return this.state.watchList.find(s => s.symbol === favorite);
+  }
 
   fetchWatchList() {
     const watchList = settings.get('stocks.watchList');
@@ -56,10 +60,9 @@ class App extends Component {
   }
 
   updateTrayTitle = () => {
-    const favorite = settings.get('stocks.favorite');
-    const f = this.state.watchList.find(s => s.symbol === favorite);
+    const { symbol, price, change } = this.favoriteStock;
     const tray = electron.getGlobal('tray');
-    tray.setTitle(`${f.symbol} ${f.latestPrice} (${f.change})`);
+    tray.setTitle(`${symbol} ${price} (${change})`);
   };
 
   addStock = symbol => {
@@ -81,7 +84,10 @@ class App extends Component {
     const s = settings.get('stocks');
     s.favorite = symbol;
     settings.set('stocks', s);
+    this.updateTrayTitle();
   };
+
+  isFavorite = symbol => this.favoriteStock.symbol === symbol;
 
   render() {
     return (
@@ -104,7 +110,14 @@ class App extends Component {
                       value={this.state.search}/>
                   </li>
                   {!this.state.search && this.state.watchList.map(({ symbol, price, change }) => (
-                    <Stock key={symbol} symbol={symbol} price={price} change={change} chooseAsFavorite={this.chooseAsFavorite} />
+                    <Stock
+                      key={symbol}
+                      symbol={symbol}
+                      price={price}
+                      change={change}
+                      chooseAsFavorite={this.chooseAsFavorite}
+                      isFavorite={this.isFavorite(symbol)}
+                    />
                   ))}
                   {this.state.search && this.state.searchResults.map(result => (
                     <li className="list-group-item" key={result.symbol}>
